@@ -20,11 +20,18 @@ export default {
     Header,
     QuestionBox
   },
+  data () {
+    return {
+      questions: []
+    }
+  },
   mounted: function () {
     fetch('https://opentdb.com/api.php?amount=10&category=14&difficulty=easy&type=multiple', {
       method: 'get'
     }).then((response) => {
-      console.log(response.json())
+      return response.json()
+    }).then((jsonData) => {
+      this.questions = jsonData.results
     })
   }
 }
